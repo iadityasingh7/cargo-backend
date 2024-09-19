@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ const connectDB = async () => {
     console.log("MongoDB Database is Connected", dbConnected.connection.host);
     console.log("MongoDB Database is Connected", dbConnected.connection.port);
   } catch (err) {
-    console.log('Something Went Wrong', err.message);
+    console.log("Something Went Wrong", err.message);
     process.exit(1);
   }
 };

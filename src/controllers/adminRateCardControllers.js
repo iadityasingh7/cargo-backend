@@ -11,7 +11,6 @@ export const createRateCard = async (req, res) => {
     codCharge,
   } = req.body;
 
-
   const rateCard = new RateCard({
     courierProviderId,
     courierProvider,
@@ -86,7 +85,8 @@ export const deleteRateCard = async (req, res) => {
     res.json({ message: "Rate Card is deleted" });
   } catch (error) {
     res.status(500).json({
-      message: "Rate card is not deleted please try again. Server-side error", error: error.message
+      message: "Rate card is not deleted please try again. Server-side error",
+      error: error.message,
     });
   }
 };
@@ -94,18 +94,14 @@ export const deleteRateCard = async (req, res) => {
 export const getAllExistingRateCard = async (req, res) => {
   try {
     const rateCards = await RateCard.find();
-    res
-      .status(200)
-      .json({
-        message: "All existing rate cards fetched from the database successfully",
-        rateCards: rateCards,
-      });
+    res.status(200).json({
+      message: "All existing rate cards fetched from the database successfully",
+      rateCards: rateCards,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Something went wrong while fetching the existing rate cards",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Something went wrong while fetching the existing rate cards",
+      error: error.message,
+    });
   }
 };

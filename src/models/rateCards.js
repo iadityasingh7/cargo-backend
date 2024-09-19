@@ -27,31 +27,35 @@ const weightSchema = new mongoose.Schema({
   },
 });
 
-const rateCardSchema = new mongoose.Schema({
-  courierProviderId: {
-    type: String,
-    required: true,
+const rateCardSchema = new mongoose.Schema(
+  {
+    courierProviderId: {
+      type: String,
+      required: true,
+    },
+    courierProvider: {
+      type: String,
+      required: true,
+    },
+    courierServiceId: {
+      type: String,
+      required: true,
+    },
+    weightPriceBasic: [weightSchema],
+    weightPriceAdditional: [weightSchema],
+    codPercent: {
+      type: Number,
+      required: true,
+    },
+    codCharge: {
+      type: Number,
+      required: true,
+    },
   },
-  courierProvider: {
-    type: String,
-    required: true,
-  },
-  courierServiceId: {
-    type: String,
-    required: true,
-  },
-  weightPriceBasic: [weightSchema],
-  weightPriceAdditional: [weightSchema],
-  codPercent: {
-    type: Number,
-    required: true,
-  },
-  codCharge: {
-    type: Number,
-    required: true,
-  },
-  
-});
+  {
+    timestamps: true,
+  }
+);
 
 const RateCard = mongoose.model("RateCard", rateCardSchema, "RateCards");
 

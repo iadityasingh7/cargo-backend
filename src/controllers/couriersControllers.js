@@ -16,14 +16,13 @@ const saveCourierData = async (
     const result = await Courier.findOneAndUpdate(
       { provider, userId },
       { email, firstName, lastName, companyId, token, provider, userId },
-      {new: true, upsert: true}
+      { new: true, upsert: true }
     );
     return result;
   } catch (error) {
-    throw new Error('Failed to save Credentials in Database:' + error?.message);
+    throw new Error("Failed to save Credentials in Database:" + error?.message);
   }
 };
-
 
 //  -------------------------------------> COURIERS <----------------------------------------
 
@@ -58,7 +57,7 @@ const shiprocket = async (req, res) => {
 
     res.status(200).json({
       message: "Email and Pawwrod is correct",
-      data:saveData,
+      data: saveData,
       status: response?.status,
     });
   } catch (error) {
@@ -99,12 +98,15 @@ const nimbuspost = async (req, res) => {
 
 //  ------------------------------------> GET ALL COURIERS IN FRONt END <---------------------------------------
 
-const   getAllExistingCouriers = async ( req, res) => {
+const getAllExistingCouriers = async (req, res) => {
   try {
     const couriers = await Courier.find({});
     res.status(200).json(couriers);
   } catch (error) {
-    res.status(500).json({ error: 'Couriers not found Please try after some time Server Side Error!!'});
+    res.status(500).json({
+      error:
+        "Couriers not found Please try after some time Server Side Error!!",
+    });
   }
 };
 

@@ -65,12 +65,10 @@ const saveCourierServiceDataInDatabase = async (req, res) => {
             .json({ message: "Courier Service store in database successfully" });
         return result;
     } catch (error) {
-        res
-            .status(500)
-            .json({
-                message:
-                    "Something went wrong to store Courier Service in database. Please try again after some time later.",
-            });
+        res.status(500).json({
+            message:
+                "Something went wrong to store Courier Service in database. Please try again after some time later.",
+        });
         throw new Error("Failed to save Credentials in Database:" + error?.message);
     }
 };
@@ -80,12 +78,10 @@ const getCourierServicesFromDatabase = async (req, res) => {
         const response = await CourierService.find();
         res.status(200).json(response);
     } catch (error) {
-        res
-            .status(500)
-            .json({
-                message:
-                    "Failed to Get the data of CourierServices From Database. Please try again after some time later.",
-            });
+        res.status(500).json({
+            message:
+                "Failed to Get the data of CourierServices From Database. Please try again after some time later.",
+        });
         throw new Error(
             "Failed to Get the data of CourierServices From Database:" +
             error?.message

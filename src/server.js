@@ -44,6 +44,8 @@ import couriersRoutes from "./routes/couriersRoutes.js";
 import courierServicesRoutes from "./routes/courierServicesRoutes.js";
 import zoneManagementRoutes from "./routes/zoneManagementRoutes.js";
 import rateCardRoutes from "./routes/rateCardRoutes.js";
+import sellerRateCardRoutes from "./routes/sellerRateCardRoutes.js";
+import usersRoutes from "./routes/usersRoutes.js";
 
 // admin ratecard middleware to check you have a valid permitions or not
 
@@ -72,9 +74,17 @@ app.use("/admin/api/courierServices", courierServicesRoutes);
 
 app.use("/api/zone-management", zoneManagementRoutes);
 
-// RATE CARD
+// ADMIN RATE CARD
 
 app.use("/admin/api/rate-card", authMiddleware, adminMiddleware, rateCardRoutes);
+
+// SELLER RATE CARD
+
+app.use("/api/admin/seller-ratecard", authMiddleware, adminMiddleware, sellerRateCardRoutes);
+
+// get all user to admin side to make a new rate card for a perticuller user
+
+app.use("/api/admin/users", authMiddleware, adminMiddleware, usersRoutes);
 
 const PORT = process.env.PORT || 5000;
 
