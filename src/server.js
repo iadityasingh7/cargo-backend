@@ -14,8 +14,9 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
+    origin: 'https://shipex-cargo-me.vercel.app',
+    methods: 'GET,POST,PUT,DELETE',
+    credentials: true
   })
 );
 
