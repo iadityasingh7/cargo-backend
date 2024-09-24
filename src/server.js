@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://shipex-cargo-me.vercel.app",
+    origin: process.env.CORS_ORIGIN,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })

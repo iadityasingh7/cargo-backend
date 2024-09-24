@@ -74,6 +74,8 @@ const registerUser = async (req, res) => {
       res
         .cookie("token", token, {
           httpOnly: true,
+          secure: process.env.CORS_TYPE === "production",
+          sameSite: "None",
         })
         .status(200)
         .json({ message: "User registered successfully" });
@@ -122,10 +124,9 @@ const loginUser = async (req, res) => {
       res
         .cookie("token", token, {
           httpOnly: true,
-          secure: true,
-          sameSite: 'None',
-          maxAge: 24 * 60 * 60 * 1000
-          // secure: false,
+          secure: process.env.CORS_TYPE === "production",
+          sameSite: "None",
+          // secure: false, for development only and Now I make it an dynamic
         })
         .status(200)
         .json({ user: user, token: token, message: "Login Successfully" });
@@ -139,7 +140,11 @@ const loginUser = async (req, res) => {
 
 const logoutUser = async (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.CORS_TYPE === "production",
+      sameSite: "None",
+    });
     res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     res.status(500).json({
@@ -193,11 +198,18 @@ const googleLogin = async (req, res) => {
     };
 
     const token = jwt.sign(payload, jwtSecret, { expiresIn: "1h" });
-    res.cookie("token", token, { httpOnly: true }).status(200).json({
-      user,
-      token,
-      message: "Google Login Successfull",
-    });
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.CORS_TYPE === "production",
+        sameSite: "None",
+      })
+      .status(200)
+      .json({
+        user,
+        token,
+        message: "Google Login Successfull",
+      });
   } catch (error) {
     res.status(500).json({ message: "Google Login Failed" });
   }
@@ -231,11 +243,18 @@ const gitHubLogin = async (req, res) => {
     };
 
     const token = jwt.sign(payload, jwtSecret, { expiresIn: "1h" });
-    res.cookie("token", token, { httpOnly: true }).status(200).json({
-      user,
-      token,
-      message: "GitHub Login Successfull",
-    });
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.CORS_TYPE === "production",
+        sameSite: "None",
+      })
+      .status(200)
+      .json({
+        user,
+        token,
+        message: "GitHub Login Successfull",
+      });
   } catch (error) {
     res.status(500).json({ message: "GitHub Login Failed" });
   }
