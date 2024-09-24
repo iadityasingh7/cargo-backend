@@ -10,15 +10,15 @@ dotenv.config({
 
 const app = express();
 
-app.use(cookieParser());
-
 app.use(
   cors({
-    origin: 'https://shipex-cargo-me.vercel.app',
-    methods: 'GET,POST,PUT,DELETE',
-    credentials: true
+    origin: "https://shipex-cargo-me.vercel.app",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
   })
 );
+
+app.use(cookieParser());
 
 app.use(express.json());
 
@@ -77,11 +77,21 @@ app.use("/api/zone-management", zoneManagementRoutes);
 
 // ADMIN RATE CARD
 
-app.use("/admin/api/rate-card", authMiddleware, adminMiddleware, rateCardRoutes);
+app.use(
+  "/admin/api/rate-card",
+  authMiddleware,
+  adminMiddleware,
+  rateCardRoutes
+);
 
 // SELLER RATE CARD
 
-app.use("/api/admin/seller-ratecard", authMiddleware, adminMiddleware, sellerRateCardRoutes);
+app.use(
+  "/api/admin/seller-ratecard",
+  authMiddleware,
+  adminMiddleware,
+  sellerRateCardRoutes
+);
 
 // get all user to admin side to make a new rate card for a perticuller user
 
