@@ -13,7 +13,7 @@ const app = express();
 app.use(
   cors({
     origin: "https://shipex-cargo-me.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"], 
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -96,6 +96,8 @@ app.use(
 // get all user to admin side to make a new rate card for a perticuller user
 
 app.use("/api/admin/users", authMiddleware, adminMiddleware, usersRoutes);
+
+app.options("*", cors());
 
 const PORT = process.env.PORT || 5000;
 

@@ -92,7 +92,6 @@ const registerUser = async (req, res) => {
 // Login Endpoint
 
 const loginUser = async (req, res) => {
-
   console.log("Testing Only", process.env.CORS_ORIGIN);
 
   const error = validationResult(req);
