@@ -74,7 +74,8 @@ const registerUser = async (req, res) => {
       res
         .cookie("token", token, {
           httpOnly: true,
-          secure: process.env.CORS_TYPE === "production",
+          // secure: process.env.CORS_TYPE === "production",
+          secure: true,
           sameSite: "None",
         })
         .status(200)
@@ -91,6 +92,9 @@ const registerUser = async (req, res) => {
 // Login Endpoint
 
 const loginUser = async (req, res) => {
+
+  console.log("Testing Only", process.env.CORS_ORIGIN);
+
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.status(400).json({ errors: error.array() });
