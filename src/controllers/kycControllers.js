@@ -274,14 +274,13 @@ const verifyBank = async (req, res) => {
 
     const response = await axios.request(options);
     res.status(200).json({
-      message: "Bank details are valid",
+      message: "Bank details",
       data: response?.data,
       status: response?.status,
     });
   } catch (error) {
-    console.error("Bank varification failed", error);
     res.status(500).json({
-      message: "Bank verifiation failed. Please try again.",
+      message: "Transaction failed at the bank. Please verify your bank account information.",
       error: error,
     });
   }
